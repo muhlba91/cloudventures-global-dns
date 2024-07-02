@@ -479,9 +479,9 @@
     read-package-json "^2.0.13"
 
 "@pulumi/pulumi@^3.0.0", "@pulumi/pulumi@^3.69.0":
-  version "3.121.0"
-  resolved "https://registry.yarnpkg.com/@pulumi/pulumi/-/pulumi-3.121.0.tgz#0671a73a56d4cdf6614837e4a9e2d1e531c9d44b"
-  integrity sha512-fv9sY1e7nPeGpvlHIMZcErHeZAsbdqOi0Jcb1oxi0NvTU3jy1EZa70q+JdE0dmqYlr43HaSL8SU5+G0/S08wGA==
+  version "3.122.0"
+  resolved "https://registry.yarnpkg.com/@pulumi/pulumi/-/pulumi-3.122.0.tgz#0a9f7d44a0cafd4092ac9c1f2b9859969edf462f"
+  integrity sha512-+EXWVJVLL+s2ianhZ4LxgNA9zt4hfgamnuwPr6qW0eBlk5gr906xSQgw4zdk8CIiAW+VT16TfxXk49Vj1BpBrw==
   dependencies:
     "@grpc/grpc-js" "^1.10.1"
     "@logdna/tail-file" "^2.0.6"
@@ -3794,6 +3794,6 @@ yocto-queue@^0.1.0:
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
 yocto-queue@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-1.0.0.tgz#7f816433fb2cbc511ec8bf7d263c3b58a1a3c251"
-  integrity sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-1.1.1.tgz#fef65ce3ac9f8a32ceac5a634f74e17e5b232110"
+  integrity sha512-b4JR1PFR10y1mKjhHY9LaGo6tmrgjit7hxVIeAmyMw3jegXR4dhYqLaQF5zMXZxY7tLpMyJeLjr1C4rLmkVe8g==
