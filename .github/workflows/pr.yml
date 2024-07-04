@@ -10,7 +10,7 @@ jobs:
     name: Conform
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -18,94 +18,32 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-  lint:
+  yamllint:
     runs-on: ubuntu-latest
-    name: ESLint
-    strategy:
-      max-parallel: 12
-      matrix:
-        node-version: ["18"]
+    name: YAMLLint
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - run: |
-          yarn install
-          yarn lint
-
-  audit:
-    runs-on: ubuntu-latest
-    name: Node Audit
-    strategy:
-      max-parallel: 12
-      matrix:
-        node-version: ["18"]
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - run: |
-          yarn audit
-        continue-on-error: true
-
-  build:
-    runs-on: ubuntu-latest
-    name: Build IaC code
-    strategy:
-      max-parallel: 12
-      matrix:
-        node-version: ["18"]
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - run: |
-          yarn install
-          yarn build
+      - run: yamllint .
 
   preview:
     runs-on: ubuntu-latest
-    name: Pulumi Preview
+    name: Preview
     needs:
       - conform
-      - lint
-      - audit
-      - build
+      - yamllint
     permissions:
       id-token: write
       contents: read
       pull-requests: write
-    strategy:
-      max-parallel: 12
-      matrix:
-        node-version: ["18"]
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
 
       - uses: hashicorp/vault-action@v3
         id: import-secrets
@@ -115,26 +53,17 @@ jobs:
           path: ${{ secrets.VAULT_PATH }}
           role: ${{ secrets.VAULT_ROLE }}
           secrets: |
-            github-cloudventures-global-dns/data/pulumi access_token | PULUMI_ACCESS_TOKEN ;
             github-cloudventures-global-dns/data/google-cloud region | CLOUDSDK_COMPUTE_REGION ;
             github-cloudventures-global-dns/data/google-cloud workload_identity_provider | GOOGLE_WORKLOAD_IDENTITY_PROVIDER ;
             github-cloudventures-global-dns/data/google-cloud ci_service_account | GOOGLE_WORKLOAD_IDENTITY_SERVICE_ACCOUNT
 
-      - uses: 'google-github-actions/auth@v2'
+      - uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ env.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ env.GOOGLE_WORKLOAD_IDENTITY_SERVICE_ACCOUNT }}
 
-      - run: |
-          npm install -g yarn
-
-      - run: |
-          yarn install
-          yarn build
-
-      - uses: pulumi/actions@v5
+      - uses: ./.github/actions/octodns-googlecloud
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
         with:
-          command: preview
-          stack-name: prod
-          comment-on-pr: true
-          refresh: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+          args: octodns-sync --config-file ./config.yaml

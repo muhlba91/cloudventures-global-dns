@@ -3,7 +3,7 @@
     "extends": [
         "config:base",
         ":dependencyDashboard",
-	":semanticCommitTypeAll(chore)"
+        ":semanticCommitTypeAll(chore)"
     ],
     "prHourlyLimit": 0,
     "prConcurrentLimit": 0,
@@ -12,7 +12,7 @@
     ],
     "enabledManagers": [
         "github-actions",
-        "npm"
+        "dockerfile"
     ],
     "github-actions": {
         "fileMatch": [
@@ -20,11 +20,10 @@
             "(^|/)action\\.ya?ml$"
         ]
     },
-    "npm": {
+    "dockerfile": {
         "fileMatch": [
-            "(^|/)package\\.json$"
-        ],
-        "rollbackPrs": true,
-        "versioning": "npm"
+            "(^|/|\\.)([Dd]ocker|[Cc]ontainer)file$",
+            "(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$"
+        ]
     }
 }

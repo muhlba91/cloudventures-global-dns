@@ -1,0 +1,1 @@
+FROM octodns/googlecloud:2024.06

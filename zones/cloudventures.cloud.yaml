@@ -1,0 +1,32 @@
+---
+'':
+  - type: NS
+    ttl: 21600
+    values:
+      - ns-cloud-d1.googledomains.com.
+      - ns-cloud-d2.googledomains.com.
+      - ns-cloud-d3.googledomains.com.
+      - ns-cloud-d4.googledomains.com.
+  - type: MX
+    values:
+      - exchange: lisa.mxrouting.net.
+        preference: 10
+      - exchange: lisa-relay.mxrouting.net.
+        preference: 20
+  - type: TXT
+    value: v=spf1 include:mxroute.com include:eu-sender.zohobooks.com ~all
+_adsp._domainkey:
+  type: TXT
+  value: dkim=all
+_dmarc:
+  type: TXT
+  value: v=DMARC1\; p=reject\; rua=mailto:postmaster@cloudventures.cloud\; ruf=mailto:postmaster@cloudventures.cloud\; fo=0\; adkim=r\; aspf=r\; rf=afrf
+x._domainkey:
+  type: TXT
+  value: v=DKIM1\; k=rsa\; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAw9nSrpfVppI0nlHdSvt3zJhyppOrxNhpN4oXFntbnnoRqyWkMFHSwvhzmvxN7Tthbi/VW2Noci6EFBtUAbNFUJ1h3TeCoYLPDaVB42aSk8HgVLkYXeGEIaHDrJLfxJnnnimcF7/lmXZCrunXIOVX38Rvsk7gEtUhwe1eAs34Ccn+wGyUrnTmmZ4YBjl/XpLwG2zBAx74I0h5LctVpEVRl7FERFgpetXW9qjfBiHuEeJm/u78CwyyDFs1Lxexy8n2zdzJel5omI/n1oe6+n8aanO/Ggj4d2M9tHWhnXRedZyfnsLUymD2S1azSWJ4UJa2sv9lucmL6Esupdx/N5UIeQIDAQAB
+28154722876._domainkey:
+  type: TXT
+  value: v=DKIM1\; k=rsa\; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCUxYGiTBOcbIVNMdWW3ef0g3H3KLoCmXGD4mIrwgwS+drSjYwAInwet3owaGKa6Y+jDNu69nPzqnHcHj5VvpPA2KB0HAqkwxHIXRyzsyQpBfKbZauipbIkigap+dJFh+hMQgqJwRGb9JlSm/YrkTllwohepUOariqoueyucIg12QIDAQAB
+mail:
+  type: CNAME
+  value: lisa.mxrouting.net.

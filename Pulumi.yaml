@@ -1,6 +1,0 @@
-name: cloudventures-global-dns
-description: "cloudventures: Global DNS"
-runtime:
-  name: nodejs
-  options:
-    typescript: false
