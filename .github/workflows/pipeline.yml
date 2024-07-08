@@ -14,7 +14,13 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy
+    name: Deploy ${{ matrix.project }}
+    strategy:
+      max-parallel: 4
+      matrix:
+        project:
+          - main
+          - cus-00001
 
     steps:
       - uses: actions/checkout@v4
@@ -42,4 +48,4 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
         with:
-          args: octodns-sync --config-file ./config.yaml --doit
+          args: octodns-sync --config-file ./projects/${{ matrix.project }}/config.yaml --doit

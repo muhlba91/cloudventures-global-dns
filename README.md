@@ -6,6 +6,7 @@
 This repository contains the Global DNS for the following domains using [octoDNS](https://github.com/octodns/octodns):
 
 - `cloudventures.cloud`
+- `kmp.eu.com`
 
 ---
 
@@ -15,6 +16,8 @@ This repository contains the Global DNS for the following domains using [octoDNS
 - [octoDNS](https://github.com/octodns/octodns)
 
 ## Managing the Records
+
+Records / Domains are structured by projects. The following commands apply to each project folder.
 
 ### Dry-Run
 

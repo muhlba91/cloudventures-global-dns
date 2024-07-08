@@ -18,16 +18,16 @@ processors:
 providers:
   yaml-config:
     class: octodns.provider.yaml.YamlProvider
-    directory: ./zones/
+    directory: ./projects/cus-00001/zones/
     default_ttl: 300
     enforce_order: False
-  googlecloud-muehlbachler-dns:
+  googlecloud-cv-cus-00001:
     class: octodns_googlecloud.GoogleCloudProvider
-    project: muehlbachler-dns
+    project: cv-cus-00001-428814
     batch_size: 1000
 
 zones:
-  cloudventures.cloud.: &dns_muehlbachler_dns
+  kmp.eu.com.: &dns_cv_cus_00001
     sources:
       - yaml-config
     processors:
@@ -36,4 +36,4 @@ zones:
       - exclude-root-ns-changes
       # - no-root-ns
     targets:
-      - googlecloud-muehlbachler-dns
+      - googlecloud-cv-cus-00001

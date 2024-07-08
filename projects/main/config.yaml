@@ -1,0 +1,39 @@
+---
+manager:
+  include_meta: False
+  max_workers: 2
+
+processors:
+  ownership:
+    class: octodns.processor.ownership.OwnershipProcessor
+    txt_name: _octodns
+    txt_value: heritage=cloudventures-global
+  trailing-dots:
+    class: octodns.processor.trailing_dots.EnsureTrailingDots
+  exclude-root-ns-changes:
+    class: octodns.processor.filter.ExcludeRootNsChanges
+  no-root-ns:
+    class: octodns.processor.filter.IgnoreRootNsFilter
+
+providers:
+  yaml-config:
+    class: octodns.provider.yaml.YamlProvider
+    directory: ./projects/main/zones/
+    default_ttl: 300
+    enforce_order: False
+  googlecloud-muehlbachler-dns:
+    class: octodns_googlecloud.GoogleCloudProvider
+    project: muehlbachler-dns
+    batch_size: 1000
+
+zones:
+  cloudventures.cloud.: &dns_muehlbachler_dns
+    sources:
+      - yaml-config
+    processors:
+      - ownership
+      - trailing-dots
+      - exclude-root-ns-changes
+      # - no-root-ns
+    targets:
+      - googlecloud-muehlbachler-dns

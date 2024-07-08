@@ -31,7 +31,7 @@ jobs:
 
   preview:
     runs-on: ubuntu-latest
-    name: Preview
+    name: Preview ${{ matrix.project }}
     needs:
       - conform
       - yamllint
@@ -39,6 +39,12 @@ jobs:
       id-token: write
       contents: read
       pull-requests: write
+    strategy:
+      max-parallel: 4
+      matrix:
+        project:
+          - main
+          - cus-00001
 
     steps:
       - uses: actions/checkout@v4
@@ -66,4 +72,4 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ env.GOOGLE_APPLICATION_CREDENTIALS }}
         with:
-          args: octodns-sync --config-file ./config.yaml
+          args: octodns-sync --config-file ./projects/${{ matrix.project }}/config.yaml
