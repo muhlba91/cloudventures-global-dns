@@ -1,1 +1,1 @@
-FROM octodns/googlecloud:2024.08
+FROM octodns/googlecloud:2024.09
