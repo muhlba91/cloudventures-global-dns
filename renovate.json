@@ -23,7 +23,7 @@
         ]
     },
     "pre-commit": {
-        "enabled": false,
+        "enabled": true,
         "fileMatch": [
             "(^|/)\\.pre-commit-config\\.ya?ml$"
         ]
