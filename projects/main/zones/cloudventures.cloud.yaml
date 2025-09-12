@@ -18,7 +18,7 @@ _adsp._domainkey:
   value: dkim=all
 _dmarc:
   type: TXT
-  value: v=DMARC1\; p=reject\; rua=mailto:oud0q6pt@rua.dmarceye.com\; ruf=mailto:postmaster@cloudventures.cloud\; fo=0\; adkim=r\; aspf=r\; rf=afrf\; ri=86400
+  value: v=DMARC1\; p=reject\; sp=reject\; rua=mailto:re+nyuxnwk9dmi@dmarc.postmarkapp.com\; ruf=mailto:postmaster@cloudventures.cloud\; fo=0\; adkim=r\; aspf=r\; rf=afrf\; ri=86400
 dkim._domainkey:
   type: TXT
   value: v=DKIM1\; k=rsa\; t=s\; s=email\; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvEP0755TQ0gyHHYm0S7Iv54nhw/SLh9jgWewrJVa05wBM5ibfvTjgaqBHeCjKJC8vuKMguU3x7DUhh4+4f2er+L154DGVA+J7PGoaXQYf7AZu3luHFnxTWwdtnr42DoiRq/QNHhTXlQPBAyykcq540AjVbl9/zme+UWUjhcTUWLICBDTm8PLrA4mal7r7NXEuyfZ1dOZPah4MADrafe/cj1co4wCv2FoYUIWQO0kEPCyR2oFQb0lyX3csgY81ywY8tf3ZmQoNm+Fk5LanXgs4y5ZAmPPpR46DMHHhi8jm1vg9UvM4yCLHR0WDfuqUlGqnez6y9ivlGYJW6wdc+GRVwIDAQAB
