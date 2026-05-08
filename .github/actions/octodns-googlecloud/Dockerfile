@@ -1,1 +1,1 @@
-FROM octodns/googlecloud:2026.04@sha256:e218bb8e2c44a6b5a5787dbbf66eece8737fcde2de8299c27b4c278c9553739a
+FROM octodns/googlecloud:2026.05@sha256:92bfa2a8e9ab41c78f75901e8d756b13e57d8229d585f651cda3ca6cc9cefe2c
