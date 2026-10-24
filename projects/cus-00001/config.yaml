@@ -28,6 +28,7 @@ providers:
 
 zones:
   kmp.eu.com.: &dns_cv_cus_00001
+    lenient: true
     sources:
       - yaml-config
     processors:

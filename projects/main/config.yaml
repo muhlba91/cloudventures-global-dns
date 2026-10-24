@@ -28,6 +28,7 @@ providers:
 
 zones:
   cloudventures.cloud.: &dns_muehlbachler_dns
+    lenient: true
     sources:
       - yaml-config
     processors:
