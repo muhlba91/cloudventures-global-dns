@@ -13,8 +13,8 @@ This repository contains the Global DNS for the following domains using [octoDNS
 
 ## Requirements
 
-- [Python](https://python.org)
-- [octoDNS](https://github.com/octodns/octodns)
+- [mise](https://mise.jdx.dev) provides Python and the virtual environment (see [Development](#development))
+- [octoDNS](https://github.com/octodns/octodns), installed with `mise exec -- pip install -r requirements.txt`
 
 ## Managing the Records
 
@@ -48,3 +48,7 @@ To successfully run and configure the DNS provider, you need to set a list of en
 
 - [GitHub Actions](https://docs.github.com/en/actions) are linting, and verifying the code.
 - [Renovate Bot](https://github.com/renovatebot/renovate) is updating GitHub Actions.
+
+## Development
+
+Tool versions (Python) are managed with [mise](https://mise.jdx.dev): run `mise trust` and `mise install` once, then use the usual commands (`mise exec -- pip install -r requirements.txt`). mise creates the virtual environment in `.venv`.

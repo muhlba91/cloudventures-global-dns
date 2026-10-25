@@ -8,6 +8,18 @@
     "enabledManagers": [
         "github-actions",
         "pre-commit",
-        "dockerfile"
+        "dockerfile",
+        "mise",
+        "pip_requirements"
+    ],
+    "packageRules": [
+        {
+            "matchDepNames": [
+                "octodns/googlecloud",
+                "octodns",
+                "octodns-googlecloud"
+            ],
+            "groupName": "octodns"
+        }
     ]
 }

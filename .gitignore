@@ -3,3 +3,7 @@ octodns/
 tmp/
 local.env
 gcp-*-key.json
+
+# mise
+mise.local.toml
+.venv/
