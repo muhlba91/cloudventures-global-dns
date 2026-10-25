@@ -1,5 +1,4 @@
 .idea/
-octodns/
 tmp/
 local.env
 gcp-*-key.json
