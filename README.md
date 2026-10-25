@@ -52,3 +52,9 @@ To successfully run and configure the DNS provider, you need to set a list of en
 ## Development
 
 Tool versions (Python) are managed with [mise](https://mise.jdx.dev): run `mise trust` and `mise install` once, then use the usual commands (`mise exec -- pip install -r requirements.txt`). mise creates the virtual environment in `.venv`.
+
+When the Python version in `mise.toml` changes (e.g. a Renovate update), mise does not rebuild the existing `.venv`. Recreate it and reinstall the dependencies:
+
+```bash
+rm -rf .venv && mise install && mise exec -- pip install -r requirements.txt
+```
