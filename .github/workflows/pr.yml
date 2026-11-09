@@ -48,7 +48,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Preview ${{ matrix.project }}
     needs:
-      - conform
       - yamllint
     permissions:
       id-token: write
