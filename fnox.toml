@@ -1,0 +1,37 @@
+# Secrets for CI and local runs, read from Vault with fnox (https://fnox.jdx.dev)
+#
+# - CI: the default profile; the Vault token comes from the GitHub OIDC login (hashicorp/vault-action, exportToken)
+# - developer machines: FNOX_PROFILE=dev adds the local Google Cloud credentials (impersonating the CI service account)
+#   from the machine's global fnox config (GCP_SOURCE_CREDENTIALS)
+#
+# run (per project): fnox exec -- octodns-sync --config-file ./projects/<project>/config.yaml
+
+if_missing = "error"
+
+# the repository's Vault mount; the token from VAULT_TOKEN (CI) or the Vault CLI's token helper
+[providers.vault]
+type = "vault"
+path = "github-cloudventures-global-dns"
+credential_command = "vault print token"
+
+[secrets]
+CLOUDSDK_COMPUTE_REGION = { provider = "vault", value = "google-cloud/region" }
+GOOGLE_WORKLOAD_IDENTITY_PROVIDER = { provider = "vault", value = "google-cloud/workload_identity_provider" }
+GOOGLE_WORKLOAD_IDENTITY_SERVICE_ACCOUNT = { provider = "vault", value = "google-cloud/ci_service_account" }
+
+# developer machines only: impersonate the CI service account with the machine's own key
+[profiles.dev.secrets.GOOGLE_APPLICATION_CREDENTIALS]
+as_file = true
+default = '''{
+  "type": "impersonated_service_account",
+  "service_account_impersonation_url": "https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${GOOGLE_WORKLOAD_IDENTITY_SERVICE_ACCOUNT}:generateAccessToken",
+  "delegates": [],
+  "source_credentials": ${GCP_SOURCE_CREDENTIALS}
+}'''
+description = "impersonated CI service account (Google client libraries)"
+
+# gcloud ignores GOOGLE_APPLICATION_CREDENTIALS
+[profiles.dev.secrets.CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE]
+as_file = true
+default = "${GOOGLE_APPLICATION_CREDENTIALS}"
+description = "impersonated CI service account (gcloud)"

@@ -6,3 +6,6 @@ gcp-*-key.json
 # mise
 mise.local.toml
 .venv/
+
+# fnox
+fnox.local.toml

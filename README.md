@@ -18,14 +18,14 @@ This repository contains the Global DNS for the following domains using [octoDNS
 
 ## Managing the Records
 
-Records / Domains are structured by projects. The following commands apply to each project folder.
+Records / Domains are structured by projects. Run the commands below from the repository root (the zone directories in each `config.yaml` are relative to it), like CI does.
 
 ### Dry-Run
 
 To check the DNS records for changes, run:
 
 ```bash
-octodns-sync --config-file ./config.yaml
+fnox exec -- octodns-sync --config-file ./projects/<project>/config.yaml
 ```
 
 ### Apply
@@ -33,14 +33,19 @@ octodns-sync --config-file ./config.yaml
 To apply the DNS records for changes, run:
 
 ```bash
-octodns-sync --config-file ./config.yaml --doit
+fnox exec -- octodns-sync --config-file ./projects/<project>/config.yaml --doit
 ```
 
-## Environment Variables
+## Secrets
 
-To successfully run and configure the DNS provider, you need to set a list of environment variables:
+The secrets come from Vault through [fnox](https://fnox.jdx.dev) (`fnox.toml`, installed by mise), in CI and locally:
 
-- `GOOGLE_APPLICATION_CREDENTIALS`: reference to a file containing the Google Cloud (GCP) service account credentials
+- **CI:** `hashicorp/vault-action` only logs in (GitHub OIDC, `exportToken`); fnox reads the values listed in `fnox.toml`.
+- **Locally:** set `VAULT_ADDR`, log in with the Vault CLI, and set `FNOX_PROFILE=dev`. The `dev` profile builds Google
+  Cloud credentials that impersonate the CI service account, from the machine's own key (`GCP_SOURCE_CREDENTIALS` in
+  the global fnox config, `~/.config/fnox/config.toml`).
+
+Run commands with `fnox exec -- ...`. `fnox.local.toml` (ignored by git) can override values for experiments.
 
 ---
 
